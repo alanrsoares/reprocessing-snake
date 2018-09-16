@@ -1,6 +1,7 @@
 {
   "name": "reprocessing-snake",
   "scripts": {
+    "dev": "npm run build:native && npm run start:native",
     "start": "./lib/bs/bytecode/indexhot.byte",
     "start:native": "./lib/bs/native/index.native",
     "build": "bsb -make-world",
