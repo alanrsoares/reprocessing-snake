@@ -1,34 +1,28 @@
-Reprocessing Example
+Reprocessing Snake
 ---
 
-Clone this repo to get started with [Reprocessing](https://github.com/schmavery/reprocessing).
+Snake Game written entirely in ReasonML using Reprocessing
 
-Demos are on other branches:
-
-- [Flappy Bird](https://github.com/bsansouci/reprocessing-example/tree/livestream-flappybird)
-- [2048](https://github.com/bsansouci/reprocessing-example/tree/2048)
-
-...and more on the [Reprocessing repo](https://github.com/schmavery/reprocessing#projects-using-reprocessing).
+Builds to both Web and OpenGL
 
 ## How to
 ```
-git clone https://github.com/bsansouci/reprocessing-example.git
+git clone https://github.com/alanrsoares/reprocessing-snake.git
 ```
 
 ### Install
-
 ```
-npm install
+[npm | yarn] install
 ```
 
 ### Build
 ```
-npm run build
+[npm | yarn] run build
 ```
 
 ### Start
 ```
-npm start
+[npm | yarn] start
 ```
 
 To build to JS run `npm run build:web` and then run a static server, like `python -m SimpleHTTPServer` and go to `localhost:8000`. If you're using safari you can simply open the `index.html` and tick `Develop > Disable Cross-Origin Restrictions`.
