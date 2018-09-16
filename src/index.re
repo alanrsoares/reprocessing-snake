@@ -1,134 +1,5 @@
 open Reprocessing;
-
-module Helpers {
-  let time_elapsed = t => Unix.gettimeofday() -. t;
-
-  let compose = (fns, env) => fns |> List.iter(f => f(env));
-};
-
-module Config = {
-  let board_size = 600;
-
-  let padding = 1;
-
-  let tiles = 60;
-
-  let tile_size = (board_size / tiles) - padding;
-};
-
-type direction =
-  | Up
-  | Down
-  | Left
-  | Right;
-
-type block = {
-  y: int,
-  x: int,
-  direction
-};
-
-type game_status = 
-  | Lost
-  | Paused
-  | Playing
-  | New;
-
-type snake = array(block);
-
-type action =
-  | TogglePause
-  | Start
-  | Reset
-  | Move(direction)
-  | AddMoveToQueue(direction);
-
-type state = {
-  snake,
-  game_status,
-  score: int,
-  high_score: int,
-  moves: list(direction)
-};
-
-let initial_state: state = {
-  snake: [|
-    { y: 1, x: 5, direction: Right },
-    { y: 1, x: 4, direction: Right },
-    { y: 1, x: 3, direction: Right },
-    { y: 1, x: 2, direction: Right },
-    { y: 1, x: 1, direction: Right }
-  |],
-  game_status: New,
-  score: 0,
-  high_score: 0,
-  moves: []
-};
-
-let drop_last = xs => Array.sub(xs, 0, Array.length(xs) - 1);
-
-let safe_index = n => {
-  if (n > Config.tiles - 1) {
-    0;
-  } else if (n < 0) {
-    Config.tiles - 1;
-  } else {
-    n;
-  }
-};
-
-module Snake {
-  let move_block = (direction, block) => {
-    switch direction {
-    | Up => { ...block, direction, y: safe_index(block.y - 1) }
-    | Down => { ...block, direction, y: safe_index(block.y + 1) }
-    | Right => { ...block, direction, x: safe_index(block.x + 1) }
-    | Left => { ...block, direction, x: safe_index(block.x - 1) }
-    };
-  };
-  
-  let move = (direction: direction, snake: snake) => {
-    let head = snake[0];
-  
-    Array.concat([ [| move_block(direction, head) |], drop_last(snake) ]);
-  };
-};
-
-module Reducers {
-  let snake = (snake, action) =>
-    switch action {
-    | Move(d) => snake |> Snake.move(d)
-    | Reset => initial_state.snake
-    | _ => snake
-    };
-  
-  let moves = (moves, action) =>
-    switch action {
-    | AddMoveToQueue(direction) => [direction] @ moves
-    | Move(_) when List.length(moves) > 0 => moves |> List.tl
-    | Reset => initial_state.moves
-    | _ => moves
-    };
-  
-  let game_status = (game_status, action) =>
-    switch action {
-    | TogglePause => game_status == Playing ? Paused : Playing
-    | Reset => initial_state.game_status
-    | _ => game_status
-    }
-};
-
-let reducer = (state, action) => {
-  switch action {
-  | Reset => initial_state
-  | _ => {
-    ...state,
-    snake: Reducers.snake(state.snake, action),
-    moves: Reducers.moves(state.moves, action),
-    game_status: Reducers.game_status(state.game_status, action)
-  }
-  };
-};
+open Game;
 
 let setup = (initial_state, env) => {
   Env.size(~width=Config.board_size, ~height=Config.board_size, env);
@@ -203,7 +74,7 @@ let draw = (state, env) => {
     switch (last_executed^) {
     | t when Helpers.time_elapsed(t) >= 0.05 => {
       last_executed := Unix.gettimeofday();
-      reducer(state, Move(direction));
+      Reducers.reduce(state, Move(direction));
     }
     | _ => state
     };
@@ -214,11 +85,11 @@ let draw = (state, env) => {
 
 let keyPressed = (state: state, env) =>
   switch (Env.keyCode(env)) {
-  | Events.Space => reducer(state, TogglePause)
-  | Events.Up | Events.W => reducer(state, AddMoveToQueue(Up))
-  | Events.Down | Events.S => reducer(state, AddMoveToQueue(Down))
-  | Events.Left | Events.A => reducer(state, AddMoveToQueue(Left))
-  | Events.Right | Events.D => reducer(state, AddMoveToQueue(Right))
+  | Events.Space => Reducers.reduce(state, TogglePause)
+  | Events.Up | Events.W => Reducers.reduce(state, AddMoveToQueue(Up))
+  | Events.Down | Events.S => Reducers.reduce(state, AddMoveToQueue(Down))
+  | Events.Left | Events.A => Reducers.reduce(state, AddMoveToQueue(Left))
+  | Events.Right | Events.D => Reducers.reduce(state, AddMoveToQueue(Right))
   | _ => state
   };
 
