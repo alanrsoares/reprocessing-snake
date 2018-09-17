@@ -1,39 +1,50 @@
 open Game;
 
-let snake = (snake, action) =>
-  switch action {
-  | Move(d) => snake |> Snake.move(d)
-  | Reset => initial_state.snake
-  | _ => snake
-  };
-  
 let moves = (moves, action, state) =>
   switch action {
-  | AddMoveToQueue(direction) => 
-    switch state.game_status {
-    | Playing => [direction] @ moves 
-    | _ => moves
-    }
-  | Move(_) when List.length(moves) > 0 => moves |> List.tl
-  | Reset => initial_state.moves
+  | AddMoveToQueue(direction) when is_legal_move(direction, state) =>
+    [direction] @ moves
   | _ => moves
   };
 
 let game_status = (game_status, action) =>
   switch action {
   | TogglePause => game_status == Playing ? Paused : Playing
-  | Reset => initial_state.game_status
   | _ => game_status
   };
 
-let reduce = (state, action) => {
+let reduce = (state, action) =>
   switch action {
   | Reset => initial_state
+  | Move(d) =>
+    let new_state = {
+      ...state,
+      snake: state.snake |> Snake.move(d),
+      moves:
+        List.length(state.moves) > 0 ? state.moves |> List.tl : state.moves
+    };
+    if (new_state.snake |> Snake.has_collided_with_self) {
+      {...new_state, game_status: GameOver}
+    } else if (new_state.snake |> Snake.has_eaten(state.food)) {
+      {
+        ...new_state,
+        score: state.score + 1,
+        food: spawn_food(new_state.snake),
+        snake: new_state.snake |> Snake.grow
+      }
+    } else {
+      new_state
+    }
+  | TogglePause =>
+    switch state.game_status {
+    | New => {...state, game_status: Playing}
+    | Playing => {...state, game_status: Paused}
+    | Paused => {...state, game_status: Playing}
+    | GameOver => initial_state
+    }
   | _ => {
-    ...state,
-    snake: snake(state.snake, action),
-    moves: moves(state.moves, action, state),
-    game_status: game_status(state.game_status, action)
-  }
+      ...state,
+      moves: moves(state.moves, action, state),
+      game_status: game_status(state.game_status, action)
+    }
   };
-};
