@@ -33,22 +33,29 @@ let draw_bg = Draw.background(Utils.color(~r=199, ~g=217, ~b=229, ~a=255));
 
 let draw_snake = (state, env) => state.snake |> Array.iteri(draw_block(env));
 
-let draw_overlay = (game_status, env) => 
-  switch (game_status) {
-  | Paused =>
-    env |> Draw.(
-      Helpers.compose([
-        background(Utils.color(~r=200, ~g=200, ~b=200, ~a=150)),
-        tint(Utils.color(~r=255, ~g=200, ~b=200, ~a=255)),
-        text(
-          ~pos=(180, 240),
-          ~body="GAME PAUSED!"
-        ),
-        noTint
-      ])
+let draw_overlay = (game_status, env) => {
+  let draw_text = switch (game_status) {
+  | New => (_) => Draw.text(
+      ~pos=(100, 240),
+      ~body="PRESS SPACE TO START",
+      env
     )
-  | _ => ()
+  | Paused => (_) => Draw.text(
+      ~pos=(180, 240),
+      ~body="GAME PAUSED",
+      env
+    )
+  | _ => (_) => ()
   };
+
+  env |> Draw.(
+    Helpers.compose([
+      background(Utils.color(~r=200, ~g=200, ~b=200, ~a=150)),
+      draw_text
+    ])
+  );
+};
+  
 
 let last_executed: ref(float) = ref(0.);
 
@@ -58,6 +65,7 @@ let draw = (state, env) => {
     draw_bg,
     draw_snake(state),
     switch state.game_status {
+    | New => draw_overlay(New)
     | Paused => draw_overlay(Paused)
     | _ => (_) => ()
     }
