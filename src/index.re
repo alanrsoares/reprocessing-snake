@@ -11,8 +11,10 @@ let draw_block = (env, i, block) => {
   let is_head = i === 0;
   let fill_color =
     is_head ?
-      Utils.color(~r=100, ~g=150, ~b=100, ~a=255) :
-      Utils.color(~r=150, ~g=100, ~b=150, ~a=255);
+      Utils.color(~r=1, ~g=22, ~b=39, ~a=255) :
+      i mod 2 != 0 ?
+        Utils.color(~r=231, ~g=29, ~b=54, ~a=255) :
+        Utils.color(~r=255, ~g=159, ~b=28, ~a=255);
   env
   |> Draw.(
        Helpers.compose([
@@ -29,7 +31,7 @@ let draw_block = (env, i, block) => {
      )
 };
 
-let draw_bg = Draw.background(Utils.color(~r=199, ~g=217, ~b=229, ~a=255));
+let draw_bg = Draw.background(Utils.color(~r=46, ~g=196, ~b=182, ~a=255));
 
 let draw_snake = (snake, env) => snake |> Array.iteri(draw_block(env));
 
@@ -47,7 +49,7 @@ let draw_overlay = (state, env) =>
     env
     |> Draw.(
          Helpers.compose([
-           background(Utils.color(~r=200, ~g=200, ~b=200, ~a=150)),
+           background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
            text(~pos=(100, 240), ~body="PRESS SPACE TO START")
          ])
        )
@@ -55,7 +57,7 @@ let draw_overlay = (state, env) =>
     env
     |> Draw.(
          Helpers.compose([
-           background(Utils.color(~r=200, ~g=200, ~b=200, ~a=150)),
+           background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
            text(~pos=(180, 240), ~body="GAME PAUSED")
          ])
        )
@@ -63,7 +65,7 @@ let draw_overlay = (state, env) =>
     env
     |> Draw.(
          Helpers.compose([
-           background(Utils.color(~r=200, ~g=200, ~b=200, ~a=150)),
+           background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
            text(~pos=(180, 240), ~body="GAME OVER")
          ])
        )

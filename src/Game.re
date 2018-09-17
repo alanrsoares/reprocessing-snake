@@ -64,7 +64,6 @@ let rec spawn_food = snake => {
   }
 };
 
-
 let initial_snake = [|
   {y: 1, x: 6, direction: Right},
   {y: 1, x: 5, direction: Right},

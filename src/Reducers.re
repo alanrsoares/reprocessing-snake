@@ -16,10 +16,10 @@ let game_status = (game_status, action) =>
 let reduce = (state, action) =>
   switch action {
   | Reset => initial_state
-  | Move(d) =>
+  | Move(direction) =>
     let new_state = {
       ...state,
-      snake: state.snake |> Snake.move(d),
+      snake: state.snake |> Snake.move(direction),
       moves:
         List.length(state.moves) > 0 ? state.moves |> List.tl : state.moves
     };
