@@ -7,9 +7,13 @@ let snake = (snake, action) =>
   | _ => snake
   };
   
-let moves = (moves, action) =>
+let moves = (moves, action, state) =>
   switch action {
-  | AddMoveToQueue(direction) => [direction] @ moves
+  | AddMoveToQueue(direction) => 
+    switch state.game_status {
+    | Playing => [direction] @ moves 
+    | _ => moves
+    }
   | Move(_) when List.length(moves) > 0 => moves |> List.tl
   | Reset => initial_state.moves
   | _ => moves
@@ -28,7 +32,7 @@ let reduce = (state, action) => {
   | _ => {
     ...state,
     snake: snake(state.snake, action),
-    moves: moves(state.moves, action),
+    moves: moves(state.moves, action, state),
     game_status: game_status(state.game_status, action)
   }
   };
