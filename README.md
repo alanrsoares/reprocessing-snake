@@ -5,6 +5,8 @@ Snake Game written entirely in ReasonML using Reprocessing
 
 Builds to both Web and OpenGL
 
+![screenshot](/assets/screenshot.png)
+
 ## How to
 ```
 git clone https://github.com/alanrsoares/reprocessing-snake.git
