@@ -39,13 +39,12 @@ type collision =
   | Food
   | Tail;
 
-let opposite_direction = (direction) =>
-  switch direction {
+let opposite_direction =
+  fun
   | Up => Down
   | Down => Up
   | Left => Right
-  | Right => Left
-  };
+  | Right => Left;
 
 let is_legal_move = (direction, state) =>
   state.game_status === Playing
@@ -54,17 +53,16 @@ let is_legal_move = (direction, state) =>
 let is_collision = (a: block, snake) =>
   snake |> Array.to_list |> List.exists((b) => b.x == a.x && b.y == a.y);
 
-let rec spawn_food = snake => {
+let rec spawn_food = (snake) => {
   let new_food = {
     x: Reprocessing.Utils.random(~min=0, ~max=Config.tiles),
     y: Reprocessing.Utils.random(~min=0, ~max=Config.tiles),
     direction: Right
   };
-
   if (is_collision(new_food, snake)) {
-    spawn_food(snake);
+    spawn_food(snake)
   } else {
-    new_food;
+    new_food
   }
 };
 
@@ -86,4 +84,3 @@ let initial_state: state = {
   food: spawn_food(initial_snake),
   last_moved_timestamp: 0.
 };
-

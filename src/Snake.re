@@ -12,12 +12,12 @@ let move_block = (direction, block) =>
 
 let hd = (self) => self[0];
 
-let tl = (self) =>
-  switch (Array.length(self)) {
-  | 1 => [||]
-  | 2 => [|self[1]|]
-  | _ => Array.sub(self, 1, Array.length(self) - 2)
-  };
+let tl =
+  fun
+  | [||]
+  | [|_|] => [||]
+  | [|_, x|] => [|x|]
+  | self => Array.sub(self, 1, Array.length(self) - 2);
 
 let direction = (self) => hd(self).direction;
 
