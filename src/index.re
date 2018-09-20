@@ -72,8 +72,6 @@ let draw_overlay = (state, env) =>
   | _ => env |> draw_score(state.score)
   };
 
-let last_executed: ref(float) = ref(0.);
-
 let draw = (state, env) => {
   /* draw */
   env
@@ -88,15 +86,11 @@ let draw = (state, env) => {
   | Playing =>
     let direction =
       switch state.moves {
-      | [] => Snake.hd(state.snake).direction
+      | [] => state.snake |> Snake.direction
       | moves => moves |> List.hd
       };
-    switch last_executed^ {
-    | time when Helpers.time_elapsed(time) >= Config.speed =>
-      last_executed := Unix.gettimeofday();
-      Reducers.reduce(state, Move(direction))
-    | _ => state
-    }
+
+    Reducers.reduce(state, Move(direction));
   | _ => state
   }
 };

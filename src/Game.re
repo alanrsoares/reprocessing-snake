@@ -31,9 +31,13 @@ type state = {
   score: int,
   high_score: int,
   moves: list(direction),
-  food: block
+  food: block,
+  last_moved_timestamp: float
 };
 
+type collision =
+  | Food
+  | Tail;
 
 let opposite_direction = (direction) =>
   switch direction {
@@ -79,6 +83,7 @@ let initial_state: state = {
   score: 0,
   high_score: 0,
   moves: [],
-  food: spawn_food(initial_snake)
+  food: spawn_food(initial_snake),
+  last_moved_timestamp: 0.
 };
 

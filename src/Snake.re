@@ -10,31 +10,42 @@ let move_block = (direction, block) =>
   | Left => {...block, direction, x: safe_index(block.x - 1)}
   };
 
-let hd = (snake) => snake[0];
+let hd = (self) => self[0];
 
-let tl = (snake) =>
-  switch (Array.length(snake)) {
+let tl = (self) =>
+  switch (Array.length(self)) {
   | 1 => [||]
-  | 2 => [|snake[1]|]
-  | _ => Array.sub(snake, 1, Array.length(snake) - 2)
+  | 2 => [|self[1]|]
+  | _ => Array.sub(self, 1, Array.length(self) - 2)
   };
 
-let drop_last = (snake) => Array.sub(snake, 0, Array.length(snake) - 1);
+let direction = (self) => hd(self).direction;
 
-let last = (snake) => snake[Array.length(snake) - 1];
+let drop_last = (self) => Array.sub(self, 0, Array.length(self) - 1);
 
-let move = (direction, snake) =>
-  Array.concat([[|move_block(direction, hd(snake))|], drop_last(snake)]);
+let last = (self) => self[Array.length(self) - 1];
 
-let has_collided_with_self = (snake) => is_collision(hd(snake), tl(snake));
+let move = (direction, self) =>
+  Array.concat([[|move_block(direction, hd(self))|], drop_last(self)]);
 
-let has_eaten = (food, snake) => is_collision(hd(snake), [|food|]);
+let has_collided_with_self = (self) => is_collision(hd(self), tl(self));
 
-let grow = (snake) => {
-  let last_block = snake |> last;
+let has_eaten = (food, self) => is_collision(hd(self), [|food|]);
+
+let detect_collision = (food, self) =>
+  if (self |> has_eaten(food)) {
+    Some(Food)
+  } else if (self |> has_collided_with_self) {
+    Some(Tail)
+  } else {
+    None
+  };
+
+let grow = (self) => {
+  let last_block = self |> last;
   let new_block = {
     ...move_block(opposite_direction(last_block.direction), last_block),
     direction: last_block.direction
   };
-  Array.concat([snake, [|new_block|]])
+  Array.concat([self, [|new_block|]])
 };
