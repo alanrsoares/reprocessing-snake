@@ -28,7 +28,7 @@ let reduce_toggle_pause = (state) =>
   | New => {...state, game_status: Playing}
   | Playing => {...state, game_status: Paused}
   | Paused => {...state, game_status: Playing}
-  | GameOver => initial_state
+  | GameOver => {...initial_state, font: state.font}
   };
 
 let reduce = (state, action) =>

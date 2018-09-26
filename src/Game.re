@@ -32,7 +32,8 @@ type state = {
   high_score: int,
   moves: list(direction),
   food: block,
-  last_moved_timestamp: float
+  last_moved_timestamp: float,
+  font: option(Reprocessing.fontT)
 };
 
 type collision =
@@ -82,5 +83,6 @@ let initial_state: state = {
   high_score: 0,
   moves: [],
   food: spawn_food(initial_snake),
-  last_moved_timestamp: 0.
+  last_moved_timestamp: 0.,
+  font: None
 };

@@ -4,7 +4,10 @@ open Game;
 
 let setup = (initial_state, env) => {
   Env.size(~width=Config.board_size, ~height=Config.board_size, env);
-  initial_state
+  {
+    ...initial_state,
+    font: Some(Draw.loadFont(~filename="assets/font16_1x.fnt", env))
+  }
 };
 
 let draw_block = (env, i, block) => {
@@ -37,28 +40,29 @@ let draw_snake = (snake, env) => snake |> Array.iteri(draw_block(env));
 
 let draw_food = (food, env) => draw_block(env, 1, food);
 
-let draw_score = (score) =>
+let draw_score = (score, font) =>
   Draw.text(
     ~pos=(10, Config.board_size - 40),
-    ~body="SCORE: " ++ string_of_int(score)
+    ~body="SCORE: " ++ string_of_int(score),
+    ~font
   );
 
-let draw_overlay = (state, env) =>
+let draw_overlay = (state, font, env) =>
   switch state.game_status {
   | New =>
     env
     |> Draw.(
          Helpers.compose([
            background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
-           text(~pos=(100, 240), ~body="PRESS SPACE TO START")
+           text(~pos=(10, 280), ~body="PRESS SPACE TO START", ~font)
          ])
-       )
+       ) 
   | Paused =>
     env
     |> Draw.(
          Helpers.compose([
            background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
-           text(~pos=(180, 240), ~body="GAME PAUSED")
+           text(~pos=(120, 280), ~body="GAME PAUSED", ~font)
          ])
        )
   | GameOver =>
@@ -66,20 +70,25 @@ let draw_overlay = (state, env) =>
     |> Draw.(
          Helpers.compose([
            background(Utils.color(~r=204, ~g=204, ~b=204, ~a=204)),
-           text(~pos=(180, 240), ~body="GAME OVER")
+           text(~pos=(160, 280), ~body="GAME OVER", ~font)
          ])
        )
-  | _ => env |> draw_score(state.score)
+  | _ => env |> draw_score(state.score, font)
   };
 
 let draw = (state, env) => {
+  let font =
+    switch state.font {
+    | Some(f) => f
+    | _ => failwith("no-font")
+    };
   /* draw */
   env
   |> Helpers.compose([
        draw_bg,
        draw_snake(state.snake),
        draw_food(state.food),
-       draw_overlay(state)
+       draw_overlay(state, font)
      ]);
   /* reduce */
   switch state.game_status {
@@ -89,8 +98,7 @@ let draw = (state, env) => {
       | [] => state.snake |> Snake.direction
       | moves => moves |> List.hd
       };
-
-    Reducers.reduce(state, Move(direction));
+    Reducers.reduce(state, Move(direction))
   | _ => state
   }
 };
