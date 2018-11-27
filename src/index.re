@@ -42,7 +42,7 @@ let draw_food = (food, env) => draw_block(env, 1, food);
 
 let draw_score = (score, font) =>
   Draw.text(
-    ~pos=(10, Config.board_size - 40),
+    ~pos=(10, Config.board_size - 10),
     ~body="SCORE: " ++ score->string_of_int,
     ~font,
   );
