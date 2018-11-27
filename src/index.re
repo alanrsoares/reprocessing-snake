@@ -100,22 +100,22 @@ let draw = (state, env) => {
       | [] => state.snake->Snake.direction
       | moves => moves->List.hd
       };
-    Reducers.reduce(state, Move(direction));
+    state->Reducers.reduce(Move(direction));
   | _ => state
   };
 };
 
 let keyPressed = (state: state, env) =>
   switch (Env.keyCode(env)) {
-  | Events.Space => Reducers.reduce(state, TogglePause)
+  | Events.Space => state->Reducers.reduce(TogglePause)
   | Events.Up
-  | Events.W => Reducers.reduce(state, AddMoveToQueue(Up))
+  | Events.W => state->Reducers.reduce(AddMoveToQueue(Up))
   | Events.Down
-  | Events.S => Reducers.reduce(state, AddMoveToQueue(Down))
+  | Events.S => state->Reducers.reduce(AddMoveToQueue(Down))
   | Events.Left
-  | Events.A => Reducers.reduce(state, AddMoveToQueue(Left))
+  | Events.A => state->Reducers.reduce(AddMoveToQueue(Left))
   | Events.Right
-  | Events.D => Reducers.reduce(state, AddMoveToQueue(Right))
+  | Events.D => state->Reducers.reduce(AddMoveToQueue(Right))
   | _ => state
   };
 

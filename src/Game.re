@@ -61,7 +61,7 @@ let rec spawn_food = snake => {
     direction: Right,
   };
   if (is_collision(new_food, snake)) {
-    spawn_food(snake);
+    snake->spawn_food;
   } else {
     new_food;
   };
