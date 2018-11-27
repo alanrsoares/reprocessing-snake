@@ -7,7 +7,7 @@ type direction =
 type block = {
   y: int,
   x: int,
-  direction
+  direction,
 };
 
 type game_status =
@@ -33,7 +33,7 @@ type state = {
   moves: list(direction),
   food: block,
   last_moved_timestamp: float,
-  font: option(Reprocessing.fontT)
+  font: option(Reprocessing.fontT),
 };
 
 type collision =
@@ -52,19 +52,19 @@ let is_legal_move = (direction, state) =>
   && direction != opposite_direction(state.snake[0].direction);
 
 let is_collision = (a: block, snake) =>
-  snake |> Array.to_list |> List.exists((b) => b.x == a.x && b.y == a.y);
+  snake->Array.to_list |> List.exists(b => b.x == a.x && b.y == a.y);
 
-let rec spawn_food = (snake) => {
+let rec spawn_food = snake => {
   let new_food = {
     x: Reprocessing.Utils.random(~min=0, ~max=Config.tiles),
     y: Reprocessing.Utils.random(~min=0, ~max=Config.tiles),
-    direction: Right
+    direction: Right,
   };
   if (is_collision(new_food, snake)) {
-    spawn_food(snake)
+    spawn_food(snake);
   } else {
-    new_food
-  }
+    new_food;
+  };
 };
 
 let initial_snake = [|
@@ -73,7 +73,7 @@ let initial_snake = [|
   {y: 1, x: 4, direction: Right},
   {y: 1, x: 3, direction: Right},
   {y: 1, x: 2, direction: Right},
-  {y: 1, x: 1, direction: Right}
+  {y: 1, x: 1, direction: Right},
 |];
 
 let initial_state: state = {
@@ -84,5 +84,5 @@ let initial_state: state = {
   moves: [],
   food: spawn_food(initial_snake),
   last_moved_timestamp: 0.,
-  font: None
+  font: None,
 };
