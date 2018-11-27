@@ -49,7 +49,7 @@ let opposite_direction =
 
 let is_legal_move = (direction, state) =>
   state.game_status === Playing
-  && direction != opposite_direction(state.snake[0].direction);
+  && direction != opposite_direction(Snake.hd(state.snake).direction);
 
 let is_collision = (a: block, snake) =>
   snake->Array.to_list |> List.exists(b => b.x == a.x && b.y == a.y);
