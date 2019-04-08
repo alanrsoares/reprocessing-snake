@@ -20,10 +20,10 @@ Tsdl@bsansouci/tsdl:
   dependencies:
     sdl2 bsansouci/SDL-mirror#fast
 
-bsb-native@4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/bsb-native/-/bsb-native-4.0.6.tgz#5c0289e24e0a3375ebf8f69a17510b884cace1ca"
-  integrity sha512-T1MkndnmA4StiKK2UvEftrqANN+h9StlLghBbwmKa833d97D86np+2wmIOw5Rqy6rNW3D076A2G51mooWTUwfQ==
+bsb-native@4.0.7000:
+  version "4.0.7000"
+  resolved "https://registry.yarnpkg.com/bsb-native/-/bsb-native-4.0.7000.tgz#04031ae81a3cd53d48868593fe059c1d5752403b"
+  integrity sha512-RcmbmdwvGHnQBhxkz6B7+J0d4cTUhWDGIJ94DmjHDlwgH7cnzWTTKqASWkPiPTqlNFyZtQxZ9qTvAQrsE/iMpw==
   dependencies:
     yauzl "^2.9.1"
 
@@ -49,10 +49,10 @@ pend@~1.2.0:
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
 
-reprocessing@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/reprocessing/-/reprocessing-0.2.0.tgz#3a7533dc4cb5aedb5f54cefd78fa336f7e104729"
-  integrity sha512-LZRwSIuvlYXTUZYLwHPXzttl8rbFQRhiI2ZTADglTw0kv/Cj07JwcCY4lWyJT5UF4Ham+67SQfEFuN+eobR6vg==
+reprocessing@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/reprocessing/-/reprocessing-0.3.0.tgz#a564c052c6e223c949de03f012f7b98323c83548"
+  integrity sha512-syFT7gneQH8SS4bxzHh5gjSlugzzvF9aMz/sqYtaDmPeT8fgvhj1oIoirT/ocEvtZDiSJFxijAK0JhO8s1n9Jg==
   dependencies:
     Reasongl "github:bsansouci/reasongl"
 

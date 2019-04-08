@@ -1,7 +1,7 @@
 {
   "name": "reprocessing-snake",
   "scripts": {
-    "dev": "npm run build:native && npm run start:native",
+    "dev": "npm run build && npm run start",
     "start": "./lib/bs/bytecode/indexhot.byte",
     "start:native": "./lib/bs/native/index.native",
     "build": "bsb -make-world",
@@ -10,9 +10,9 @@
     "clean": "bsb -clean-world"
   },
   "dependencies": {
-    "reprocessing": "0.2.0"
+    "reprocessing": "0.3.0"
   },
   "devDependencies": {
-    "bsb-native": "4.0.6"
+    "bsb-native": "4.0.7000"
   }
 }
