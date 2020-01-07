@@ -10,9 +10,9 @@
     "clean": "bsb -clean-world"
   },
   "dependencies": {
-    "reprocessing": "0.3.0"
+    "reprocessing": "^0.3.2"
   },
   "devDependencies": {
-    "bsb-native": "4.0.7000"
+    "bsb-native": "^4.0.1100"
   }
 }

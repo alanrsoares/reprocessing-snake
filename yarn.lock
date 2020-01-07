@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"Reasongl@github:bsansouci/reasongl":
+"Reasongl@github:bsansouci/reasongl#868ca060c7fe41595fe6157c7ab668af82a170e1":
   version "0.2.0"
-  resolved "https://codeload.github.com/bsansouci/reasongl/tar.gz/17ece5a9540ff0b067c8fc0276e75adffcd64c45"
+  resolved "https://codeload.github.com/bsansouci/reasongl/tar.gz/868ca060c7fe41595fe6157c7ab668af82a170e1"
   dependencies:
     Tgls bsansouci/tgls
     Tsdl bsansouci/tsdl
@@ -16,14 +16,14 @@ Tgls@bsansouci/tgls:
 
 Tsdl@bsansouci/tsdl:
   version "0.9.1"
-  resolved "https://codeload.github.com/bsansouci/tsdl/tar.gz/1367e9ab949cb6b41e9a566910d0afd19035f175"
+  resolved "https://codeload.github.com/bsansouci/tsdl/tar.gz/2a472117eb1134a0ba828969788c98757160b293"
   dependencies:
     sdl2 bsansouci/SDL-mirror#fast
 
-bsb-native@4.0.7000:
-  version "4.0.7000"
-  resolved "https://registry.yarnpkg.com/bsb-native/-/bsb-native-4.0.7000.tgz#04031ae81a3cd53d48868593fe059c1d5752403b"
-  integrity sha512-RcmbmdwvGHnQBhxkz6B7+J0d4cTUhWDGIJ94DmjHDlwgH7cnzWTTKqASWkPiPTqlNFyZtQxZ9qTvAQrsE/iMpw==
+bsb-native@^4.0.1100:
+  version "4.0.1100"
+  resolved "https://registry.yarnpkg.com/bsb-native/-/bsb-native-4.0.1100.tgz#c61e02afc12ec393b63dfb440ba7b309968e107f"
+  integrity sha512-XQ6farp7NBctlw1EOMQDvWEyOAGzwqP5G9N37Jb9KgvD/eiSNPclcMFi6BpFlNeHDYPyX4T0rSaFK7tvQFb5/Q==
   dependencies:
     yauzl "^2.9.1"
 
@@ -40,21 +40,21 @@ fd-slicer@~1.1.0:
     pend "~1.2.0"
 
 gl-matrix@*:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-2.8.1.tgz#1c7873448eac61d2cd25803a074e837bd42581a3"
-  integrity sha512-0YCjVpE3pS5XWlN3J4X7AiAx65+nqAI54LndtVFnQZB6G/FVLkZH8y8V6R3cIoOQR4pUdfwQGd1iwyoXHJ4Qfw==
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.1.0.tgz#f5b2de17d8fed95a79e5025b10cded0ab9ccbed0"
+  integrity sha512-526NA+3EA+ztAQi0IZpSWiM0fyQXIp7IbRvfJ4wS/TjjQD0uv0fVybXwwqqSOlq33UckivI0yMDlVtboWm3k7A==
 
 pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
 
-reprocessing@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/reprocessing/-/reprocessing-0.3.0.tgz#a564c052c6e223c949de03f012f7b98323c83548"
-  integrity sha512-syFT7gneQH8SS4bxzHh5gjSlugzzvF9aMz/sqYtaDmPeT8fgvhj1oIoirT/ocEvtZDiSJFxijAK0JhO8s1n9Jg==
+reprocessing@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/reprocessing/-/reprocessing-0.3.2.tgz#8b6913b0249d6103fcb60522fec62950264cee49"
+  integrity sha512-+8l7N3sVeWqluKV4BSueFW7UoTaSrPBYYjncSfbWJuhBmao4HBCkOzvqAY5UBn14F+fJeJO7S9nwLGznviCSKg==
   dependencies:
-    Reasongl "github:bsansouci/reasongl"
+    Reasongl "github:bsansouci/reasongl#868ca060c7fe41595fe6157c7ab668af82a170e1"
 
 sdl2@bsansouci/SDL-mirror#fast:
   version "2.0.5"

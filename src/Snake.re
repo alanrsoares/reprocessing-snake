@@ -25,15 +25,15 @@ let drop_last = self => Array.sub(self, 0, Array.length(self) - 1);
 
 let last = self => self[Array.length(self) - 1];
 
-let move = (direction, self) =>
+let move = (self, direction) =>
   Array.concat([[|move_block(direction, self->hd)|], self->drop_last]);
 
 let has_collided_with_self = self => is_collision(self->hd, self->tl);
 
-let has_eaten = (food, self) => is_collision(self->hd, [|food|]);
+let has_eaten = (self, food) => is_collision(self->hd, [|food|]);
 
-let detect_collision = (food, self) =>
-  if (self |> has_eaten(food)) {
+let detect_collision = (self, food) =>
+  if (self->has_eaten(food)) {
     Some(Food);
   } else if (self->has_collided_with_self) {
     Some(Tail);

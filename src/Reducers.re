@@ -6,11 +6,11 @@ let reduce_move = (direction, state) =>
     let new_state = {
       ...state,
       last_moved_timestamp: Unix.gettimeofday(),
-      snake: state.snake |> Snake.move(direction),
+      snake: state.snake->Snake.move(direction),
       moves:
         List.length(state.moves) > 0 ? state.moves->List.tl : state.moves,
     };
-    switch (new_state.snake |> Snake.detect_collision(state.food)) {
+    switch (new_state.snake->Snake.detect_collision(state.food)) {
     | None => new_state
     | Some(Tail) => {...new_state, game_status: GameOver}
     | Some(Food) => {
