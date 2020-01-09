@@ -12,25 +12,17 @@ let setup = (initial_state, env) => {
 };
 
 let draw_food = (env, block) => {
-  let fill_color = Theme.Colors.snakeEvenBlock;
+  let radius = Config.tile_size / 2;
+  let offset = x => x * Config.(tile_size + padding) + radius;
 
   env
   ->chain(
       Draw.[
-        fill(fill_color),
+        fill(Theme.Colors.red),
         ellipse(
-          ~center=(
-            block.x
-            * (Config.tile_size + Config.padding)
-            + Config.tile_size
-            / 2,
-            block.y
-            * (Config.tile_size + Config.padding)
-            + Config.tile_size
-            / 2,
-          ),
-          ~radx=Config.tile_size / 2,
-          ~rady=Config.tile_size / 2,
+          ~center=(offset(block.x), offset(block.y)),
+          ~radx=radius,
+          ~rady=radius,
         ),
       ],
     );
@@ -38,20 +30,16 @@ let draw_food = (env, block) => {
 
 let draw_block = (env, i, block) => {
   let is_head = i === 0;
-  let fill_color =
-    Theme.Colors.(
-      is_head ? snakeHead : i mod 2 != 0 ? snakeEvenBlock : snakeOddBlock
-    );
+  let is_even = i mod 2 != 0;
+  let fill_color = Theme.Colors.(is_head ? black : is_even ? red : orange);
+  let offset = Config.(tile_size + padding);
 
   env
   ->chain(
       Draw.[
         fill(fill_color),
         rect(
-          ~pos=(
-            block.x * (Config.tile_size + Config.padding),
-            block.y * (Config.tile_size + Config.padding),
-          ),
+          ~pos=(block.x * offset, block.y * offset),
           ~width=Config.tile_size,
           ~height=Config.tile_size,
         ),
