@@ -1,7 +1,5 @@
 let time_elapsed = t => Unix.gettimeofday() -. t;
 
-let compose = (fns, env) => fns |> List.iter(f => f(env));
-
 let chain = (env, fns) => fns |> List.iter(f => f(env));
 
 let juxt = (fns, x) => fns |> List.map(f => f(x));

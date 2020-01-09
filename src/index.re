@@ -17,9 +17,10 @@ let draw_block = (env, i, block) => {
     Theme.Colors.(
       is_head ? snakeHead : i mod 2 != 0 ? snakeEvenBlock : snakeOddBlock
     );
-  Draw.(
-    env
-    ->chain([
+
+  env
+  ->chain(
+      Draw.[
         fill(fill_color),
         rect(
           ~pos=(
@@ -29,8 +30,8 @@ let draw_block = (env, i, block) => {
           ~width=Config.tile_size,
           ~height=Config.tile_size,
         ),
-      ])
-  );
+      ],
+    );
 };
 
 let draw_background = Draw.background(Theme.Colors.background);
