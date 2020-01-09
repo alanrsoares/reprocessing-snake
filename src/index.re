@@ -4,10 +4,10 @@ open Game;
 open Helpers;
 
 let setup = (initial_state, env) => {
-  Env.size(~width=Config.board_size, ~height=Config.board_size, env);
+  env |> Config.(Env.size(~width=board_size, ~height=board_size));
   {
     ...initial_state,
-    font: Some(Draw.loadFont(~filename="assets/font16_1x.fnt", env)),
+    font: Some(env |> Draw.loadFont(~filename="assets/font16_1x.fnt")),
   };
 };
 
