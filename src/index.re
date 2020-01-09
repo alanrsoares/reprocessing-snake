@@ -11,6 +11,31 @@ let setup = (initial_state, env) => {
   };
 };
 
+let draw_food = (env, block) => {
+  let fill_color = Theme.Colors.snakeEvenBlock;
+
+  env
+  ->chain(
+      Draw.[
+        fill(fill_color),
+        ellipse(
+          ~center=(
+            block.x
+            * (Config.tile_size + Config.padding)
+            + Config.tile_size
+            / 2,
+            block.y
+            * (Config.tile_size + Config.padding)
+            + Config.tile_size
+            / 2,
+          ),
+          ~radx=Config.tile_size / 2,
+          ~rady=Config.tile_size / 2,
+        ),
+      ],
+    );
+};
+
 let draw_block = (env, i, block) => {
   let is_head = i === 0;
   let fill_color =
@@ -38,7 +63,7 @@ let draw_background = Draw.background(Theme.Colors.background);
 
 let draw_snake = (snake, env) => snake |> Array.iteri(env->draw_block);
 
-let draw_food = (food, env) => env->draw_block(1, food);
+let draw_food = (food, env) => env->draw_food(food);
 
 let draw_score = (score, font) =>
   Draw.text(
