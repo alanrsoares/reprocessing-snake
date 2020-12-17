@@ -2,18 +2,19 @@
   "name": "reprocessing-snake",
   "scripts": {
     "dev": "npm run build && npm run start",
-    "start": "./lib/bs/bytecode/indexhot.byte",
+    "start": "http-server .",
     "start:native": "./lib/bs/native/index.native",
     "build": "bsb -make-world",
     "build:web": "bsb -make-world -backend js",
     "build:native": "bsb -make-world -backend native",
-    "clean": "bsb -clean-world"
+    "clean": "bsb -clean-world",
+    "postinstall": "node ./scripts/patch-bs-packages.js"
   },
   "dependencies": {
-    "reprocessing": "^0.3.2"
+    "reprocessing": "^1.0.0"
   },
   "devDependencies": {
-    "bsb-native": "4.0.1100"
+    "bs-platform": "^8.4.2"
   },
   "license": "MIT"
 }

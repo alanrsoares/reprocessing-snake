@@ -1,7 +1,12 @@
 {
   "name": "reprocessing-snake",
-  "sources": "src",
-  "bs-dependencies": ["reprocessing"],
+  "bsc-flags": ["-bs-super-errors"],
+  "sources": [
+    {
+      "dir": "src",
+      "type": "dev"
+    }
+  ],
   "entries": [
     {
       "backend": "bytecode",
@@ -12,9 +17,14 @@
       "main-module": "Index"
     },
     {
+      "backend": "bytecode",
+      "main-module": "Index"
+    },
+    {
       "backend": "js",
       "main-module": "Index"
     }
   ],
+  "bs-dependencies": ["reprocessing"],
   "refmt": 3
 }
