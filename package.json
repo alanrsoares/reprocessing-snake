@@ -4,17 +4,15 @@
     "dev": "npm run build && npm run start",
     "start": "http-server .",
     "start:native": "./lib/bs/native/index.native",
-    "build": "bsb -make-world",
-    "build:web": "bsb -make-world -backend js",
-    "build:native": "bsb -make-world -backend native",
-    "clean": "bsb -clean-world",
+    "build": "rescript build",
+    "clean": "rescript clean",
     "postinstall": "node ./scripts/patch-bs-packages.js"
   },
   "dependencies": {
     "reprocessing": "^1.0.0"
   },
   "devDependencies": {
-    "bs-platform": "^8.4.2"
+    "rescript": "^9.1.4"
   },
   "license": "MIT"
 }
