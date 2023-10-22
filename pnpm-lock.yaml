@@ -1,0 +1,91 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  reprocessing:
+    specifier: ^1.0.0
+    version: 1.0.0
+
+devDependencies:
+  rescript:
+    specifier: ^9.1.4
+    version: 9.1.4
+
+packages:
+
+  /@bsansouci/reasongl@1.0.1:
+    resolution: {integrity: sha512-BToUhFt9nj6JXIIORo6pFBXK/qNVBVivwae4tueTzwWdL0yeMRDYK/aIs0/Nx7XOI+1QJam6CN55oo62SO2zTA==}
+    dependencies:
+      '@bsansouci/tgls': 1.0.3
+      '@bsansouci/tsdl': 1.0.2
+      bigarray: github.com/bsansouci/otherlibs/6332dc8176f14dd3c6467b92d10be73237217b4c
+      gl-matrix: 3.4.3
+      unix: github.com/bsansouci/otherlibs/6332dc8176f14dd3c6467b92d10be73237217b4c
+    dev: false
+
+  /@bsansouci/tgls@1.0.3:
+    resolution: {integrity: sha512-4elbF9rAgzhRNKYr0fADtzO5io+6xD5cfQzMHCXNc2D06IMqs8EOgs8BusyUMTGPuO84mqC5T4kJejXWpMNklA==}
+    dev: false
+
+  /@bsansouci/tsdl@1.0.2:
+    resolution: {integrity: sha512-GKXGMnma0EtHWumIvN6JB7tqnS0v1OjeFxMQy+4efVo7A6m4jsBiyP3lIFZRzgOFxjzr816x33WUHZEYDPkR6g==}
+    dependencies:
+      sdl2: github.com/bsansouci/SDL-mirror/45e92456627c099fccd0ca2f1516581bd816c48a
+    dev: false
+
+  /buffer-crc32@0.2.13:
+    resolution: {integrity: sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==}
+    dev: false
+
+  /fd-slicer@1.1.0:
+    resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
+    dependencies:
+      pend: 1.2.0
+    dev: false
+
+  /gl-matrix@3.4.3:
+    resolution: {integrity: sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==}
+    dev: false
+
+  /pend@1.2.0:
+    resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
+    dev: false
+
+  /reprocessing@1.0.0:
+    resolution: {integrity: sha512-yie/Mr1kRMf2GP1zFHZe/CcRHpW1glaUklMZJHhGmZcdRc2AK5g7fJVbs8H+8z72Bm2Hk5LXKbTX3qQwdKFagA==}
+    dependencies:
+      '@bsansouci/reasongl': 1.0.1
+      '@bsansouci/tsdl': 1.0.2
+      dynlink: github.com/bsansouci/otherlibs/6332dc8176f14dd3c6467b92d10be73237217b4c
+    dev: false
+
+  /rescript@9.1.4:
+    resolution: {integrity: sha512-aXANK4IqecJzdnDpJUsU6pxMViCR5ogAxzuqS0mOr8TloMnzAjJFu63fjD6LCkWrKAhlMkFFzQvVQYaAaVkFXw==}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+
+  /yauzl@2.10.0:
+    resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
+    dependencies:
+      buffer-crc32: 0.2.13
+      fd-slicer: 1.1.0
+    dev: false
+
+  github.com/bsansouci/SDL-mirror/45e92456627c099fccd0ca2f1516581bd816c48a:
+    resolution: {tarball: https://codeload.github.com/bsansouci/SDL-mirror/tar.gz/45e92456627c099fccd0ca2f1516581bd816c48a}
+    name: sdl2
+    version: 2.0.5
+    requiresBuild: true
+    dependencies:
+      yauzl: 2.10.0
+    dev: false
+
+  github.com/bsansouci/otherlibs/6332dc8176f14dd3c6467b92d10be73237217b4c:
+    resolution: {tarball: https://codeload.github.com/bsansouci/otherlibs/tar.gz/6332dc8176f14dd3c6467b92d10be73237217b4c}
+    name: otherlibs
+    version: 0.0.1
+    dev: false
